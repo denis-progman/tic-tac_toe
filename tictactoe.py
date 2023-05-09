@@ -1,84 +1,36 @@
-BLANK_SQUARE = '_'
-
+from area import Area
+from player import Player
 
 class TicTacToe:
+    def __init__(self, area, players):
+        self.area = area
+        self.players = players
+        self.current_player = 0
 
-    def __init__(self, board_size=3):
-        self.board_size = board_size
-        self.board = [BLANK_SQUARE] * self.board_size ** 2
-        self.current_player = 'X'
+    
+    def play(self):
+        while True:
+            self.area.print_board()
+            position = int(input(f'Enter position (0 - {self.area.get_size() ** 2 - 1}): '))
+            self.players[self.current_player].make_move(position)
 
-    def print_board(self, players_positions = []):
-        print()
-        for i in range(0, self.board_size ** 2):
-            print(self.board[i], end='       ')
-            if i % self.board_size == self.board_size - 1:
-                print()
-                print()
 
-    def make_move(self, position):
-        if self.board[position] == BLANK_SQUARE:
-            self.board[position] = self.current_player
-            if self.current_player == 'X':
-                self.current_player = 'O'
-            else:
-                self.current_player = 'X'
-        else:
-            print('Invalid move!')
 
-    def check_winner(self):
-        # Check rows
-        for i in range(0, self.board_size ** 2, self.board_size):
-            count_same = 1
-            for j in range(i + 1, i + self.board_size):
-                if self.board[j] == self.board[j-1] != BLANK_SQUARE:
-                    count_same += 1
-            if count_same == self.board_size:
-                return self.board[i]
+    # def check_draw(self):
+    #     return BLANK_SQUARE not in self.board
 
-        # Check columns
-        for i in range(self.board_size):
-            count_same = 1
-            for j in range(i + self.board_size, self.board_size ** 2, self.board_size):
-                if self.board[j] == self.board[j - self.board_size] != BLANK_SQUARE:
-                    count_same += 1
-            if count_same == self.board_size:
-                return self.board[i]
-
-        # Check diagonals
-        count_same = 0
-        for i in range(0, self.board_size ** 2, self.board_size + 1):
-            if self.board[i] == self.board[0] != BLANK_SQUARE:
-                count_same += 1
-        if count_same == self.board_size:
-            return self.board[0]
-
-        count_same = 0
-        for i in range(self.board_size - 1, self.board_size ** 2 - 1, self.board_size - 1):
-            if self.board[i] == self.board[self.board_size - 1] != BLANK_SQUARE:
-                count_same += 1
-        if count_same == self.board_size:
-            return self.board[self.board_size - 1]
-
-        return None
-
-    def check_draw(self):
-        return BLANK_SQUARE not in self.board
-
-    def reset(self):
-        self.board = [BLANK_SQUARE] * 9
-        self.current_player = 'X'
+    # def reset(self):
+    #     self.board = [BLANK_SQUARE] * 9
+    #     self.current_player = 'X'
 
 
 # Main program starts here
 board_size = int(input('What board size do you want? ')) | 3
+area = Area(board_size)
+player_x = Player("X")
+player_0 = Player("0")
 
-game = TicTacToe(board_size=board_size)
-
+game = TicTacToe(area, [player_x, player_0])
+game.play()
 # Game loop
-while game.check_winner() is None and not game.check_draw():
-    game.print_board()
-    position = int(input(f'Enter position (0 - {game.board_size ** 2 - 1}): '))
-    game.make_move(position)
 
-game.print_board()
