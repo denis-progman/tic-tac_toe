@@ -8,7 +8,7 @@ class TicTacToe:
         self.board = [BLANK_SQUARE] * self.board_size ** 2
         self.current_player = 'X'
 
-    def print_board(self):
+    def print_board(self, players_positions = []):
         print()
         for i in range(0, self.board_size ** 2):
             print(self.board[i], end='       ')
