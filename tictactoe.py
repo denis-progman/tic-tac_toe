@@ -1,30 +1,29 @@
 BLANK_SQUARE = '_'
-
+X_PLAYER = "X"
+O_PLAYER = "0"
 
 class TicTacToe:
 
-    def __init__(self, board_size=3):
+    def __init__(self, board_size):
         self.board_size = board_size
         self.board = [BLANK_SQUARE] * self.board_size ** 2
-        self.current_player = 'X'
+        self.current_player = X_PLAYER
 
     def print_board(self):
         print()
         for i in range(0, self.board_size ** 2):
             print(self.board[i], end='       ')
             if i % self.board_size == self.board_size - 1:
-                print()
-                print()
+                print("\n")
 
     def make_move(self, position):
         if self.board[position] == BLANK_SQUARE:
             self.board[position] = self.current_player
-            if self.current_player == 'X':
-                self.current_player = 'O'
+            if self.current_player == X_PLAYER:
+                self.current_player = O_PLAYER
             else:
-                self.current_player = 'X'
-        else:
-            print('Invalid move!')
+                self.current_player = X_PLAYER
+        raise Exception('Invalid move!')
 
     def check_winner(self):
         # Check rows
@@ -67,7 +66,7 @@ class TicTacToe:
 
     def reset(self):
         self.board = [BLANK_SQUARE] * 9
-        self.current_player = 'X'
+        self.current_player = X_PLAYER
 
 
 # Main program starts here
