@@ -9,6 +9,7 @@ class TicTacToe:
         self.board = [BLANK_SQUARE] * self.board_size ** 2
         self.current_player = X_PLAYER
 
+
     def print_board(self):
         print()
         for i in range(0, self.board_size ** 2):
@@ -17,13 +18,14 @@ class TicTacToe:
                 print("\n")
 
     def make_move(self, position):
-        if self.board[position] == BLANK_SQUARE:
-            self.board[position] = self.current_player
-            if self.current_player == X_PLAYER:
-                self.current_player = O_PLAYER
-            else:
-                self.current_player = X_PLAYER
-        raise Exception('Invalid move!')
+        if self.board[position] != BLANK_SQUARE:
+            raise Exception('Invalid move!')
+
+        self.board[position] = self.current_player
+        if self.current_player == X_PLAYER:
+            self.current_player = O_PLAYER
+        else:
+            self.current_player = X_PLAYER
 
     def check_winner(self):
         # Check rows
@@ -64,20 +66,26 @@ class TicTacToe:
     def check_draw(self):
         return BLANK_SQUARE not in self.board
 
-    def reset(self):
-        self.board = [BLANK_SQUARE] * 9
-        self.current_player = X_PLAYER
+    def play(self):
+        # Game loop
+        while self.check_winner() is None and not self.check_draw():
+            try:
+                self.print_board()
+                position = int(input(f'Enter position (0 - {self.board_size ** 2 - 1}): '))
+                self.make_move(position)
+            except Exception as inst:
+                print(inst)
+
+        self.print_board()
+
+    # def reset(self): // unused
+    #     self.board = [BLANK_SQUARE] * 9
+    #     self.current_player = X_PLAYER
 
 
 # Main program starts here
-board_size = int(input('What board size do you want? ')) | 3
+
+board_size = int(input('What board size do you want? ')  or 3)
 
 game = TicTacToe(board_size=board_size)
-
-# Game loop
-while game.check_winner() is None and not game.check_draw():
-    game.print_board()
-    position = int(input(f'Enter position (0 - {game.board_size ** 2 - 1}): '))
-    game.make_move(position)
-
-game.print_board()
+game.play()
