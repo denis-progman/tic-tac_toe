@@ -11,7 +11,7 @@ class TicTacToe:
     def print_board(self):
         print()
         for i in range(0, self.board_size ** 2):
-            print(self.board[i], end='  ')
+            print(self.board[i], end='       ')
             if i % self.board_size == self.board_size - 1:
                 print()
                 print()
@@ -71,7 +71,7 @@ class TicTacToe:
 
 
 # Main program starts here
-board_size = int(input('What board size do you want? '))
+board_size = int(input('What board size do you want? ')) | 3
 
 game = TicTacToe(board_size=board_size)
 
