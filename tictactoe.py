@@ -3,9 +3,8 @@ class TicTacToe:
         self.area = area
         self.players = players
         self.current_player = 0
-
         for player in self.players:
-            player.scores = [0]*(self.area.get_size() * 2 + 2)        
+            player.fill_storage(self.area.get_size())        
 
     def next_player(self):
         self.current_player = self.current_player + 1

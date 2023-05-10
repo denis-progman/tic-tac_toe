@@ -5,6 +5,9 @@ class Player:
 
     def get_mark(self):
         return self.mark
+    
+    def fill_storage(self, area_size):
+        self.scores = [0]*(area_size * 2 + 2)   
 
     def add_score(self, point_address):
         self.scores[point_address] += 1
@@ -14,3 +17,4 @@ class Player:
         if max_point in self.scores:
             return True
         return False
+    
