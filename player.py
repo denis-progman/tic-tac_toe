@@ -1,11 +1,16 @@
 class Player:
     def __init__(self, mark, ):
-        self.type = mark
-        self.positions = []
-        self.score_points = []
+        self.mark = mark
+        self.scores = []
 
-    def make_move(self, position):
-        if position in self.positions:
-            raise Exception('You are already here!')
-        self.positions.append(position)
-        return self.positions
+    def get_mark(self):
+        return self.mark
+
+    def add_score(self, point_address):
+        self.scores[point_address] += 1
+        return self.scores
+    
+    def is_winner(self, max_point):
+        if max_point in self.scores:
+            return True
+        return False
