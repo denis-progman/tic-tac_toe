@@ -28,13 +28,13 @@ class TicTacToe:
         print(f'The turn of {player.get_mark()} player..')
         if type(player).__name__ == "AutoPlayer":
             return player.next_position(self.area.get_taken_positions(), self.area.get_space())
-        position = input(f'Enter position (0 - {self.area.get_space() - 1}): ')
+        position = input(f'Enter position (1 - {self.area.get_space()}): ')
         if not position.isnumeric():                    
             raise UserWarning("Wrong symbol!")
         position = int(position)
-        if position > self.area.get_space() or position < 0:
+        if position > self.area.get_space() or position < 1:
             raise UserWarning("Wrong number!")
-        return position
+        return position - 1
     
     def play(self):
         self.area.print_board()
