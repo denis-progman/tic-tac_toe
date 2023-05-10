@@ -14,6 +14,9 @@ class Area:
     def get_space(self):
         return self.space
     
+    def get_taken_positions(self):
+        return self.taken_positions
+    
     def took_position(self, position, mark):
         if position in self.taken_positions:
             raise UserWarning("This position is already taken! Please choose another one.")

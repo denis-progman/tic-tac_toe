@@ -1,6 +1,3 @@
-from area import Area
-from player import Player
-
 class TicTacToe:
     def __init__(self, area, players):
         self.area = area
@@ -26,39 +23,29 @@ class TicTacToe:
         if column + row == self.area.get_size() - 1:
             self.players[self.current_player].add_score(self.area.get_size() * 2 + 1)
 
+    def position_request(self, player): 
+        print(f'The turn of {player.get_mark()} player..')
+        if type(player).__name__ == "AutoPlayer":
+            return player.next_position(self.area.get_taken_positions(), self.area.get_space())
+        position = input(f'Enter position (0 - {self.area.get_space() - 1}): ')
+        if not position.isnumeric():                    
+            raise UserWarning("Wrong symbol!")
+        position = int(position)
+        if position > self.area.get_space() or position < 0:
+            raise UserWarning("Wrong number!")
+        return position
+    
     def play(self):
         self.area.print_board()
         while True:
             try:
-                position = input(f'Enter position (0 - {self.area.get_space() - 1}): ')
-                if not position.isnumeric():                    
-                    raise UserWarning("Wrong symbol!")
-                position = int(position)
-                if position > self.area.get_space() or position < 0:
-                    raise UserWarning("Wrong number!")
-                
+                position = self.position_request(self.players[self.current_player])
                 self.score_count(position)
                 self.area.took_position(position, self.players[self.current_player].get_mark()).print_board()
                 if self.players[self.current_player].is_winner(self.area.get_size()):
                     print(f'\n\n\nThe winner is {self.players[self.current_player].mark}! Cool!\n\n\n')
                     break
                 self.next_player()
-            except UserWarning as w:
-                print(f'{w}\n')
+            except UserWarning as warning:
+                print(f'{warning}\n')
                 self.area.print_board()
-
-
-# Main program starts here
-board_size = int(input('What board size do you want? ') or 3)
-area = Area(board_size)
-player_x = Player("X")
-player_0 = Player("0")
-# player_y = Player("Y")
-
-game = TicTacToe(area, [
-    player_x, 
-    player_0, 
-    # player_y
-])
-game.play()
-
