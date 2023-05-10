@@ -11,12 +11,18 @@ class Launcher:
         self.area = Area(board_size)
         self.players = [
             Player("X"),
-            AutoPlayer("0"),
             # Player("Y"), # We can have so many players that we want
+            AutoPlayer("0"),
             AutoPlayer("$"), # And auto players!
+            # AutoPlayer("@"),
             # Player("J"),
         ]
 
     def start(self):
-        game = TicTacToe(self.area, self.players)
-        game.play()
+        try: 
+            game = TicTacToe(self.area, self.players)
+            game.play()
+        except Warning as warning:
+            print(warning)
+        except BaseException as error:
+            print(f'Ups! it\'s some unusual error. We are really sorry!\n\n{error}')

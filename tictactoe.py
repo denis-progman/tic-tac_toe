@@ -23,7 +23,9 @@ class TicTacToe:
         if column + row == self.area.get_size() - 1:
             self.players[self.current_player].add_score(self.area.get_size() * 2 + 1)
 
-    def position_request(self, player): 
+    def position_request(self, player):
+        if len(self.area.get_taken_positions()) == self.area.get_space():
+            raise Warning("\n\nAll positions are taken, it over!\nWe have a draw!\n\n")
         print(f'The turn of {player.get_mark()} player..')
         if type(player).__name__ == "AutoPlayer":
             return player.next_position(self.area.get_taken_positions(), self.area.get_space())
