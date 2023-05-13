@@ -10,7 +10,7 @@ class Area:
         self.size = size
         self.space = self.size ** 2
         self.positions = [0] * self.space
-
+    
     def get_size(self):
         return self.size
     
