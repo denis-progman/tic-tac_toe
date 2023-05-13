@@ -33,7 +33,7 @@ class Area:
             index[row + coll + 1] = 1
         if row + coll == self.size - 1:
             index[row + coll + 2] = 1
-        index[self.space - 1] = player
+        index[len(index) - 1] = player
         return index   
     
     def take_position(self, position, player: Player):
@@ -49,7 +49,7 @@ class Area:
         for i in range(0, self.space):
             print_mark = self.BLANK_SQUARE
             if self.positions[i]:
-                print_mark = self.positions[i][self.space - 1].get_mark()
+                print_mark = self.positions[i][len(self.positions[i]) - 1].get_mark()
             print(print_mark, end=' '* self.HORIZON_SPACE)
             if i % self.size == self.size - 1:
                 print("\n" * self.VERTICAL_SPACE)
