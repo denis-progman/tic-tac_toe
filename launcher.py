@@ -1,6 +1,7 @@
 from area import Area
 from player import Player
 from auto_player import AutoPlayer
+from intelligent_auto_player import IntelligentAutoPlayer
 from tictactoe import TicTacToe
 
 class Launcher:
@@ -10,11 +11,13 @@ class Launcher:
         board_size = int(input('What board size do you want? ') or self.DEFAULT_GAME_SIZE)
         self.area = Area(board_size)
         self.players = [
-            Player("X"),
+            Player("X", board_size),
             # Player("Y"), # We can have so many players that we want
-            AutoPlayer("0"),
-            AutoPlayer("$"), # And auto players!
+            AutoPlayer("0", board_size),
+            AutoPlayer("$", board_size), # And auto players!
             # AutoPlayer("@"),
+            # AutoPlayer("&"),
+            # IntelligentAutoPlayer("Q")
             # Player("J"),
         ]
 
@@ -24,5 +27,5 @@ class Launcher:
             game.play()
         except Warning as warning:
             print(warning)
-        except BaseException as error:
-            print(f'Ups! it\'s some unusual error. We are really sorry!\n\n{error}')
+        # except BaseException as error:
+        #     print(f'Ups! it\'s some unusual error. We are really sorry!\n\n{error}')
