@@ -27,5 +27,5 @@ class Launcher:
             game.play()
         except Warning as warning:
             print(warning)
-        # except BaseException as error:
-        #     print(f'Ups! it\'s some unusual error. We are really sorry!\n\n{error}')
+        except BaseException as error:
+            print(f'Ups! it\'s some unusual error. We are really sorry!\n\n{error}')
