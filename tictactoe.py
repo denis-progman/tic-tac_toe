@@ -12,10 +12,24 @@ class TicTacToe:
         self.current_player = self.current_player + 1
         if self.current_player >= len(self.players):
             self.current_player = 0
+    
+    def get_leaders_by_score(self):
+        top_score = 0
+        the_bests = []
+        for player in self.players:
+            score = max(player.get_scores())
+            if score > top_score:
+                top_score = score
+                the_bests = []
+            if top_score == score:
+                the_bests.append(player.get_mark())
+        the_bests.append(top_score)
+        return the_bests
 
     def position_request(self, player: Player):
         if self.area.is_full():
-            raise Warning("\n\nAll positions are taken, it over!\nWe have a draw!\n\n")
+            leaders = self.get_leaders_by_score()
+            raise Warning(f"\n\nAll positions are taken, it over!\nThe best result {leaders.pop()}\nhas been taken by: {leaders}\n\n")
         print(f'The turn of {player.get_mark()} player..')
         return player.next_position(self.area, self.players)
     
