@@ -49,18 +49,18 @@ class IntelligentAutoPlayer(AutoPlayer):
         for way_num in range(0, len(self.scores)):
             if total_scores[way_num] == area_size:
                 continue  
-            if self.__level <= 1 and my_bests[way_num] + 1 == area_size:
+            if self.__level >= 1 and my_bests[way_num] + 1 == area_size:
                 best_choose = way_num
                 break
-            if self.__level <= 2 and (not total_scores[way_num] or (my_bests[way_num] and total_scores[way_num] == my_bests[way_num] and not way_num in rasing_chosen_ways)):
+            if self.__level >= 2 and (not total_scores[way_num] or (my_bests[way_num] and total_scores[way_num] == my_bests[way_num] and not way_num in rasing_chosen_ways)):
                 rasing_chosen_ways.append(way_num)
             for other_bests in others_bests:
-                if self.__level <= 3 and other_bests[way_num] + 1 == area_size:
+                if self.__level >= 3 and other_bests[way_num] + 1 == area_size:
                     best_choose = way_num
                     break_flag = True
                     break  
                 for other_bests in others_bests:
-                    if self.__level <= 4 and other_bests[way_num] and total_scores[way_num] == other_bests[way_num] and not way_num in obstructing_chosen_ways:
+                    if self.__level >= 4 and other_bests[way_num] and total_scores[way_num] == other_bests[way_num] and not way_num in obstructing_chosen_ways:
                         obstructing_chosen_ways.append(way_num)          
             if break_flag:
                 break        
@@ -73,7 +73,7 @@ class IntelligentAutoPlayer(AutoPlayer):
             the_choose = best_choose
             print(f"privet or win by {the_choose} way")
 
-        if self.__level <= 5:
+        if self.__level >= 5:
             for available_position_ways in available_positions_base:
                 for available_position_way in available_position_ways:
                     if available_position_way in rasing_chosen_ways and available_position_way in obstructing_chosen_ways:
