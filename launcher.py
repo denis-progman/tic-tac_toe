@@ -11,13 +11,13 @@ class Launcher:
         board_size = int(input('What board size do you want? ') or self.DEFAULT_GAME_SIZE)
         self.area = Area(board_size)
         self.players = [
-            Player("X", board_size),
+            # Player("X", board_size),
             # Player("Y"), # We can have so many players that we want
-            AutoPlayer("0", board_size),
+            # AutoPlayer("#", board_size),
             AutoPlayer("$", board_size), # And auto players!
-            # AutoPlayer("@"),
+            AutoPlayer("@", board_size),
             # AutoPlayer("&"),
-            # IntelligentAutoPlayer("Q")
+            IntelligentAutoPlayer("Q", board_size, 1)
             # Player("J"),
         ]
 

@@ -1,9 +1,11 @@
+from memory_handler import MemoryHandler
+
 class Player:
-    id_source = 0
-    def __init__(self, mark, area_size):
+    id_source = None
+    def __init__(self, mark: str, area_size: int):
         self.id = self.create_id()
         self.mark = mark
-        self.scores = self.create_storage(area_size) 
+        self.scores = MemoryHandler.create_storage(area_size) 
 
     def get_id(self):
         return self.id
@@ -16,27 +18,26 @@ class Player:
     
     @classmethod
     def create_id(self): 
-        self.id_source += 1
+        if self.id_source is None: 
+            self.id_source = 0
+        else:
+            self.id_source += 1
         return self.id_source
-    
-    def create_storage(self, area_size):
-        return [0]*(area_size * 2 + 2)   
 
     def add_scores(self, position_index: list):
-        self.scores = map(sum, zip(self.scores, position_index[:-1]))
+        for score_num, _ in enumerate(self.scores):
+            self.scores[score_num] += position_index[score_num]
         return self.scores
     
-    def is_winner(self, area_size):
-        if area_size in self.scores:
-            return True
-        return False
-    def next_position(self, positions: list):
-        space = len(positions)
-        position = input(f'Enter position (1 - {space}): ')
+    def is_winner(self, area_size: int):
+        return area_size in self.scores
+    
+    def next_position(self, area, all_players: list):
+        position = input(f'Enter position (1 - {area.get_space()}): ')
         if not position.isnumeric():                    
             raise UserWarning("Wrong symbol!")
         position = int(position)
-        if position > space or position < 1:
+        if position > area.get_space() or position < 1:
             raise UserWarning("Wrong number!")
         return position - 1
     

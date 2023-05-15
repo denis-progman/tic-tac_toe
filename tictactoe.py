@@ -17,7 +17,7 @@ class TicTacToe:
         if self.area.is_full():
             raise Warning("\n\nAll positions are taken, it over!\nWe have a draw!\n\n")
         print(f'The turn of {player.get_mark()} player..')
-        return player.next_position(self.area.get_positions())
+        return player.next_position(self.area, self.players)
     
     def play(self):
         self.area.print_board()
