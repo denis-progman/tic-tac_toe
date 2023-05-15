@@ -12,13 +12,13 @@ class Launcher:
         self.area = Area(board_size)
         self.players = [
             # Player("X", board_size),
-            # Player("Y"), # We can have so many players that we want
-            # AutoPlayer("#", board_size),
+            # Player("Y", board_size), # We can have so many players that we want
+            AutoPlayer("#", board_size),
             AutoPlayer("$", board_size), # And auto players!
             AutoPlayer("@", board_size),
-            # AutoPlayer("&"),
+            # AutoPlayer("&", board_size),
             IntelligentAutoPlayer("Q", board_size, 5)
-            # Player("J"),
+            # Player("J", board_size),
         ]
 
     def start(self):
