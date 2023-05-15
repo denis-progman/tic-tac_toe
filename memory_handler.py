@@ -1,8 +1,4 @@
 class MemoryHandler:
-    OUTCASTES_KEY = "outcasts"
-    WIN_WAYS_KEY = "win_ways"
-    BEST_WAYS_KEY = "best_ways"
-    TOTAL_SCORES_KEY = "total_scores"
 
     def create_storage(area_size: int, additional_cells: int = 0):
         return [0] * (area_size * 2 + 2 + additional_cells)
@@ -36,3 +32,4 @@ class MemoryHandler:
             index[row_coll_place + 1] = 1
         index += additional_cells_data
         return index 
+    

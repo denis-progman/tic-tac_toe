@@ -13,11 +13,11 @@ class Launcher:
         self.players = [
             # Player("X", board_size),
             # Player("Y", board_size), # We can have so many players that we want
+            IntelligentAutoPlayer("Q", board_size, 5),
             AutoPlayer("#", board_size),
             AutoPlayer("$", board_size), # And auto players!
-            AutoPlayer("@", board_size),
+            # AutoPlayer("@", board_size),
             # AutoPlayer("&", board_size),
-            IntelligentAutoPlayer("Q", board_size, 5)
             # Player("J", board_size),
         ]
 

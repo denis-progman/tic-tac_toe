@@ -5,6 +5,6 @@ You can add players or auto players in the `launcher` file
 START GAME: \
 `python start_game.py` \
 or \
-`python3 start_game.py` \
+`python3 start_game.py` 
 
 depends of how you set up your python..

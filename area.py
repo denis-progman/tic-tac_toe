@@ -48,3 +48,4 @@ class Area:
             print(print_mark, end=' '* self.HORIZON_SPACE)
             if i % self.size == self.size - 1:
                 print("\n" * self.VERTICAL_SPACE)
+                
