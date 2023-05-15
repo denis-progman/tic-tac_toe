@@ -23,11 +23,15 @@ class Player:
         else:
             self.id_source += 1
         return self.id_source
+    
+    @staticmethod
+    def _sum_scores(base_score_index: list, additional_score_index: list):
+        for score_num, _ in enumerate(base_score_index ):
+            base_score_index[score_num] += additional_score_index[score_num]
+        return base_score_index
 
     def add_scores(self, position_index: list):
-        for score_num, _ in enumerate(self.scores):
-            self.scores[score_num] += position_index[score_num]
-        return self.scores
+        return self._sum_scores(self.scores, position_index)
     
     def is_winner(self, area_size: int):
         return area_size in self.scores

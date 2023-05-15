@@ -17,7 +17,7 @@ class Launcher:
             AutoPlayer("$", board_size), # And auto players!
             AutoPlayer("@", board_size),
             # AutoPlayer("&"),
-            IntelligentAutoPlayer("Q", board_size, 1)
+            IntelligentAutoPlayer("Q", board_size, 5)
             # Player("J"),
         ]
 

@@ -10,7 +10,8 @@ class AutoPlayer(Player):
         super().__init__(mark, area_size)
         self.set_pause()
 
-    def _get_random_position(self, available_positions):
+    @staticmethod
+    def _get_random_choice(available_positions):
         return available_positions[random.randint(0, len(available_positions) - 1)]
     
     def set_pause(self, seconds: int = 1):
@@ -21,5 +22,5 @@ class AutoPlayer(Player):
 
     def next_position(self, area: Area, players: list[Player]):
         self._pause()
-        return self._get_random_position(area.get_available_positions())
+        return self._get_random_choice(area.get_available_positions())
         
